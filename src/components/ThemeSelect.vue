@@ -47,9 +47,9 @@ const toggleNight = () => {
 <template>
   <Button
     variant="link"
-    title="Toggle Night Mode"
+    title="다크모드 전환"
     class="text-surface-200"
-    :label="showText ? 'Toggle Night Mode' : ''"
+    :label="showText ? '다크모드 전환' : ''"
     @click="toggleNight"
   >
     <template #icon>

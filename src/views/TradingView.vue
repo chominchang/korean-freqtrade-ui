@@ -88,57 +88,57 @@ function refreshOHLCV(pair: string, columns: string[]) {
         :h="gridLayoutMultiPane.h"
         drag-allow-from=".drag-header"
       >
-        <DraggableContainer header="Multi Pane">
+        <DraggableContainer header="다중 패널">
           <div class="mt-1 flex justify-center">
             <BotControls class="mt-1 mb-2" />
           </div>
           <Tabs value="0" scrollable lazy>
             <TabList>
               <Tab value="0" severity="secondary">
-                <div title="Pairs combined">
+                <div title="페어 통합">
                   <span v-if="settingsStore.multiPaneButtonsShowText" class="ms-1"
-                    >Pairs combined</span
+                    >페어 통합</span
                   >
                   <i-mdi-view-list v-else />
                 </div>
               </Tab>
               <Tab value="1" severity="secondary">
-                <div title="General">
-                  <span v-if="settingsStore.multiPaneButtonsShowText" class="ms-1">General</span>
+                <div title="일반">
+                  <span v-if="settingsStore.multiPaneButtonsShowText" class="ms-1">일반</span>
                   <i-mdi-information v-else />
                 </div>
               </Tab>
               <Tab value="2" severity="secondary">
-                <div title="Performance">
+                <div title="성능">
                   <span v-if="settingsStore.multiPaneButtonsShowText" class="ms-1"
-                    >Performance</span
+                    >성능</span
                   >
                   <i-mdi-chart-line v-else />
                 </div>
               </Tab>
               <Tab value="3" severity="secondary">
-                <div title="Balance">
-                  <span v-if="settingsStore.multiPaneButtonsShowText" class="ms-1">Balance</span>
+                <div title="잔고">
+                  <span v-if="settingsStore.multiPaneButtonsShowText" class="ms-1">잔고</span>
                   <i-mdi-bank v-else />
                 </div>
               </Tab>
               <Tab value="4" severity="secondary">
-                <div title="Time Breakdown">
+                <div title="시간별 분석">
                   <span v-if="settingsStore.multiPaneButtonsShowText" class="ms-1"
-                    >Time Breakdown</span
+                    >시간별 분석</span
                   >
                   <i-mdi-folder-clock v-else />
                 </div>
               </Tab>
               <Tab value="5" severity="secondary">
-                <div title="Pairlist">
-                  <span v-if="settingsStore.multiPaneButtonsShowText" class="ms-1">Pairlist</span>
+                <div title="페어 목록">
+                  <span v-if="settingsStore.multiPaneButtonsShowText" class="ms-1">페어 목록</span>
                   <i-mdi-format-list-group v-else />
                 </div>
               </Tab>
               <Tab value="6" severity="secondary">
-                <div title="Pair Locks">
-                  <span v-if="settingsStore.multiPaneButtonsShowText" class="ms-1">Pair Locks</span>
+                <div title="페어 잠금">
+                  <span v-if="settingsStore.multiPaneButtonsShowText" class="ms-1">페어 잠금</span>
                   <i-mdi-lock-alert v-else />
                 </div>
               </Tab>
@@ -184,13 +184,13 @@ function refreshOHLCV(pair: string, columns: string[]) {
         :h="gridLayoutOpenTrades.h"
         drag-allow-from=".drag-header"
       >
-        <DraggableContainer header="Open Trades">
+        <DraggableContainer header="진행 중인 거래">
           <TradeList
             class="open-trades"
             :trades="botStore.activeBot.openTrades"
-            title="Open trades"
+            title="진행 중인 거래"
             :active-trades="true"
-            empty-text="Currently no open trades."
+            empty-text="현재 진행 중인 거래가 없습니다."
           />
         </DraggableContainer>
       </GridItem>
@@ -204,13 +204,13 @@ function refreshOHLCV(pair: string, columns: string[]) {
         :h="gridLayoutTradeHistory.h"
         drag-allow-from=".drag-header"
       >
-        <DraggableContainer header="Closed Trades">
+        <DraggableContainer header="종료된 거래">
           <TradeList
             class="trade-history"
             :trades="botStore.activeBot.closedTrades"
-            title="Trade history"
+            title="거래 내역"
             :show-filter="true"
-            empty-text="No closed trades so far."
+            empty-text="아직 종료된 거래가 없습니다."
           />
         </DraggableContainer>
       </GridItem>
@@ -229,7 +229,7 @@ function refreshOHLCV(pair: string, columns: string[]) {
         :min-h="4"
         drag-allow-from=".drag-header"
       >
-        <DraggableContainer header="Trade Detail">
+        <DraggableContainer header="거래 상세">
           <TradeDetail
             :trade="botStore.activeBot.tradeDetail"
             :stake-currency="botStore.activeBot.stakeCurrency"
@@ -247,7 +247,7 @@ function refreshOHLCV(pair: string, columns: string[]) {
         :min-h="6"
         drag-allow-from=".drag-header"
       >
-        <DraggableContainer header="Chart">
+        <DraggableContainer header="차트">
           <CandleChartContainer
             :available-pairs="botStore.activeBot.whitelist"
             :historic-view="!!false"

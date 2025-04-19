@@ -32,8 +32,8 @@ defineEmits<{
       class="justify-start!"
       size="small"
       severity="secondary"
-      title="Forceexit"
-      label="Forceexit"
+      title="강제 종료"
+      label="강제 종료"
       @click="$emit('forceExit', trade)"
     >
       <template #icon>
@@ -45,8 +45,8 @@ defineEmits<{
       size="small"
       class="justify-start!"
       severity="secondary"
-      title="Forceexit limit"
-      label="Forceexit limit"
+      title="지정가 강제 종료"
+      label="지정가 강제 종료"
       @click="$emit('forceExit', trade, 'limit')"
     >
       <template #icon>
@@ -58,8 +58,8 @@ defineEmits<{
       class="justify-start!"
       size="small"
       severity="secondary"
-      title="Forceexit market"
-      label="Forceexit market"
+      title="시장가 강제 종료"
+      label="시장가 강제 종료"
       @click="$emit('forceExit', trade, 'market')"
     >
       <template #icon>
@@ -71,8 +71,8 @@ defineEmits<{
       class="justify-start!"
       size="small"
       severity="secondary"
-      title="Forceexit partial"
-      label="Forceexit partial"
+      title="부분 강제 종료"
+      label="부분 강제 종료"
       @click="$emit('forceExitPartial', trade)"
     >
       <template #icon>
@@ -84,8 +84,8 @@ defineEmits<{
       class="justify-start!"
       size="small"
       severity="secondary"
-      title="Cancel open orders"
-      label="Cancel open orders"
+      title="미체결 주문 취소"
+      label="미체결 주문 취소"
       @click="$emit('cancelOpenOrder', trade)"
     >
       <template #icon>
@@ -97,8 +97,8 @@ defineEmits<{
       class="justify-start!"
       size="small"
       severity="secondary"
-      title="Increase position"
-      label="Increase position"
+      title="포지션 증가"
+      label="포지션 증가"
       @click="$emit('forceEntry', trade)"
     >
       <template #icon>
@@ -110,8 +110,8 @@ defineEmits<{
       class="justify-start!"
       size="small"
       severity="secondary"
-      title="Reload"
-      label="Reload"
+      title="새로고침"
+      label="새로고침"
       @click="$emit('reloadTrade', trade)"
     >
       <template #icon><i-mdi-reload-alert /> </template>
@@ -120,8 +120,8 @@ defineEmits<{
       class="justify-start!"
       size="small"
       severity="secondary"
-      title="Delete trade"
-      label="Delete trade"
+      title="거래 삭제"
+      label="거래 삭제"
       @click="$emit('deleteTrade', trade)"
     >
       <template #icon>

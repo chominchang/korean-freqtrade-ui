@@ -2,7 +2,7 @@
 import type { AuthStorageWithBotId } from '@/types';
 
 defineProps({
-  loginText: { required: false, default: 'Login', type: String },
+  loginText: { required: false, default: '로그인', type: String },
 });
 const loginViewOpen = ref(false);
 const loginInfo = ref<AuthStorageWithBotId | undefined>(undefined);
@@ -31,7 +31,7 @@ defineExpose({
     <Dialog
       id="modal-prevent-closing"
       v-model:visible="loginViewOpen"
-      header="Login to your bot"
+      header="봇에 로그인"
       :dismissable-mask="true"
     >
       <BotLogin

@@ -17,8 +17,8 @@ function confirmRemoveBot() {
 
 function removeBotQuestion() {
   msgBox.value?.show({
-    title: 'Logout confirmation',
-    message: `Really remove (logout) from ${props.bot.botName} (${props.bot.botId})?`,
+    title: '로그아웃 확인',
+    message: `정말로 ${props.bot.botName} (${props.bot.botId})에서 로그아웃하시겠습니까?`,
     accept: () => {
       confirmRemoveBot();
     },
@@ -44,14 +44,14 @@ const autoRefreshLoc = computed({
         <ToggleSwitch v-model="autoRefreshLoc" class="mr-2" />
         <div
           v-if="botStore.botStores[bot.botId].isBotLoggedIn"
-          :title="botStore.botStores[bot.botId].isBotOnline ? 'Online' : 'Offline'"
+          :title="botStore.botStores[bot.botId].isBotOnline ? '온라인' : '오프라인'"
         >
           <i-mdi-circle
             class="mx-1"
             :class="botStore.botStores[bot.botId].isBotOnline ? 'text-green-500' : 'text-red-500'"
           />
         </div>
-        <div v-else title="Login info expired, please login again.">
+        <div v-else title="로그인 정보가 만료되었습니다. 다시 로그인해주세요.">
           <i-mdi-cancel class="text-red-500" />
         </div>
       </div>
@@ -61,7 +61,7 @@ const autoRefreshLoc = computed({
           v-if="botStore.botStores[bot.botId].isBotLoggedIn"
           size="small"
           severity="secondary"
-          title="Edit bot"
+          title="봇 편집"
           @click="$emit('edit')"
         >
           <i-mdi-pencil />
@@ -70,12 +70,12 @@ const autoRefreshLoc = computed({
           v-else
           size="small"
           severity="secondary"
-          title="Login again"
+          title="다시 로그인"
           @click="$emit('editLogin')"
         >
           <i-mdi-login />
         </Button>
-        <Button size="small" severity="secondary" title="Delete bot" @click="removeBotQuestion">
+        <Button size="small" severity="secondary" title="봇 삭제" @click="removeBotQuestion">
           <i-mdi-delete />
         </Button>
       </div>

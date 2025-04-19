@@ -13,9 +13,9 @@ const props = defineProps({
 });
 
 const modeDescs: { [key in modes]: string } = {
-  default: 'Current profit',
-  total: 'Total profit',
-  realized: 'Realized profit',
+  default: '현재 수익',
+  total: '총 수익',
+  realized: '실현 수익',
 };
 
 const profitRatio = computed<number | undefined>(() => {
@@ -46,7 +46,7 @@ const profitDesc = computed((): string => {
   let profit = `${modeDescs[props.mode]}: ${
     profitRatio.value ? formatPercent(profitRatio.value) : ''
   } (${profitAbs.value})`;
-  profit += `\nOpen since: ${timestampms(props.trade.open_timestamp)}`;
+  profit += `\n시작 시간: ${timestampms(props.trade.open_timestamp)}`;
   return profit;
 });
 </script>

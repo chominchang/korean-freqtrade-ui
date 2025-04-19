@@ -105,47 +105,47 @@ watch(
 // Navigation items array
 const navItems = ref([
   {
-    label: 'Trade',
+    label: '거래',
     to: '/trade',
     visible: computed(() => !botStore.canRunBacktest),
     icon: 'i-mdi-currency-usd',
   },
   {
-    label: 'Dashboard',
+    label: '대시보드',
     to: '/dashboard',
     visible: computed(() => !botStore.canRunBacktest),
     icon: 'i-mdi-view-dashboard',
   },
   {
-    label: 'Chart',
+    label: '차트',
     to: '/graph',
     icon: 'i-mdi-chart-line',
   },
   {
-    label: 'Logs',
+    label: '로그',
     to: '/logs',
     icon: 'i-mdi-format-list-bulleted',
   },
   {
-    label: 'Settings',
+    label: '설정',
     to: '/settings',
     mobileOnly: true,
     icon: 'i-mdi-cog',
   },
   {
-    label: 'Backtest',
+    label: '백테스트',
     to: '/backtest',
     visible: computed(() => botStore.canRunBacktest),
     icon: 'i-mdi-currency-usd',
   },
   {
-    label: 'Download Data',
+    label: '데이터 다운로드',
     to: '/download_data',
     visible: computed(() => botStore.isWebserverMode && botStore.activeBot.botApiVersion >= 2.41),
     icon: 'i-mdi-download',
   },
   {
-    label: 'Pairlist Config',
+    label: '페어리스트 설정',
     to: '/pairlist_config',
     icon: 'i-mdi-format-list-numbered-rtl',
     visible: computed(
@@ -157,16 +157,16 @@ const navItems = ref([
 
 const menuItems = computed<MenuItem[]>(() => [
   {
-    label: `V: ${settingsStore.uiVersion}`,
+    label: `버전: ${settingsStore.uiVersion}`,
     disabled: true,
   },
   {
-    label: 'Settings',
+    label: '설정',
     icon: 'i-mdi-cog',
     command: () => router.push('/settings'),
   },
   {
-    label: 'Lock dynamic Layout',
+    label: '레이아웃 잠금',
     checkbox: true,
     checked: layoutStore.layoutLocked,
     command: () => {
@@ -174,12 +174,12 @@ const menuItems = computed<MenuItem[]>(() => [
     },
   },
   {
-    label: 'Reset Layout',
+    label: '레이아웃 초기화',
     icon: 'i-mdi-lock-reset',
     command: resetDynamicLayout,
   },
   {
-    label: 'Logout',
+    label: '로그아웃',
     icon: 'i-mdi-logout',
     command: clickLogout,
     visible: botStore.hasBots && botStore.botCount === 1,
@@ -197,7 +197,7 @@ const drawerVisible = ref(false);
     <div class="flex bg-primary-500 border-b border-primary">
       <RouterLink class="ms-2 flex flex-row items-center pe-2 gap-2" exact to="/">
         <img class="h-[30px] align-middle" src="@/assets/freqtrade-logo.png" alt="Home Logo" />
-        <span class="text-slate-200 text-xl md:hidden lg:inline text-nowrap">Freqtrade UI</span>
+        <span class="text-slate-200 text-xl md:hidden lg:inline text-nowrap">프리퀀트레이드 UI</span>
       </RouterLink>
       <div class="flex justify-between w-full text-center items-center ms-3">
         <div class="items-center hidden md:flex gap-5 ms-5">
@@ -221,7 +221,7 @@ const drawerVisible = ref(false);
           <div
             v-if="!settingsStore.confirmDialog"
             class="my-auto me-5 flex text-yellow-300"
-            title="Confirm dialog deactivated, Forced exits will be executed immediately. Be careful."
+            title="확인 대화상자가 비활성화되었습니다. 강제 종료가 즉시 실행됩니다. 주의하세요."
           >
             <i-mdi-run-fast />
             <i-mdi-alert />
@@ -247,7 +247,7 @@ const drawerVisible = ref(false);
                 <BotEntry :bot="option" :no-buttons="true" />
               </template>
             </Select>
-            <ReloadControl class="me-3" title="Confirm Dialog deactivated." />
+            <ReloadControl class="me-3" title="확인 대화상자가 비활성화되었습니다." />
           </div>
           <div
             class="hidden md:flex md:flex-wrap lg:flex-nowrap items-center nav-item text-surface-300 me-2"
@@ -255,14 +255,14 @@ const drawerVisible = ref(false);
             <span class="text-sm me-2">
               {{
                 (botStore.activeBotorUndefined && botStore.activeBotorUndefined.botName) ||
-                'No bot selected'
+                '선택된 봇 없음'
               }}
             </span>
             <span v-if="botStore.botCount === 1">
               {{
                 botStore.activeBotorUndefined && botStore.activeBotorUndefined.isBotOnline
-                  ? 'Online'
-                  : 'Offline'
+                  ? '온라인'
+                  : '오프라인'
               }}
             </span>
           </div>
@@ -309,13 +309,13 @@ const drawerVisible = ref(false);
           </Button>
           <Drawer
             v-model:visible="drawerVisible"
-            header="Drawer"
+            header="메뉴"
             position="right"
             class="bg-primary-500"
           >
             <template #container>
               <div class="flex flex-row items-center">
-                <h3 class="text-xl font-bold w-full text-center text-surface-200">Freqtrade UI</h3>
+                <h3 class="text-xl font-bold w-full text-center text-surface-200">프리퀀트레이드 UI</h3>
                 <Button
                   class="float-right mt-1 me-1"
                   variant="outlined"
@@ -338,7 +338,7 @@ const drawerVisible = ref(false);
                 </RouterLink>
                 <Divider />
                 <span class="text-surface-200 text-center"
-                  >Version: {{ settingsStore.uiVersion }}</span
+                  >버전: {{ settingsStore.uiVersion }}</span
                 >
 
                 <div class="flex flex-row items-center justify-center">
@@ -364,7 +364,7 @@ const drawerVisible = ref(false);
                     <BotEntry :bot="option" :no-buttons="true" />
                   </template>
                 </Select>
-                <ReloadControl class="justify-center w-full" title="Confirm Dialog deactivated." />
+                <ReloadControl class="justify-center w-full" title="확인 대화상자가 비활성화되었습니다." />
               </div>
             </template>
           </Drawer>

@@ -115,12 +115,12 @@ const handleSubmit = async () => {
     if (axios.isAxiosError(error) && error.response && error.response.status === 401) {
       nameState.value = false;
       pwdState.value = false;
-      errorMessage.value = 'Connected to bot, however Login failed, Username or Password wrong.';
+      errorMessage.value = '봇에 연결되었으나 로그인에 실패했습니다. 사용자명 또는 비밀번호가 잘못되었습니다.';
     } else {
       urlState.value = false;
-      errorMessage.value = `Login failed.
-Please verify that the bot is running, the Bot API is enabled and the URL is reachable.
-You can verify this by navigating to ${auth.value.url}/api/v1/ping to make sure the bot API is reachable`;
+      errorMessage.value = `로그인에 실패했습니다.
+봇이 실행 중인지, Bot API가 활성화되어 있는지, URL에 접근할 수 있는지 확인하세요.
+${auth.value.url}/api/v1/ping으로 이동하여 봇 API에 접근할 수 있는지 확인할 수 있습니다.`;
       if (auth.value.url !== window.location.origin) {
         errorMessageCORS.value = true;
       }
@@ -157,17 +157,17 @@ onMounted(() => {
 <template>
   <form ref="formRef" novalidate @submit.stop.prevent="handleSubmit" @reset="handleReset">
     <div class="mb-4">
-      <label for="name-input" class="block text-sm font-medium">Bot Name</label>
+      <label for="name-input" class="block text-sm font-medium">봇 이름</label>
       <InputText
         id="name-input"
         v-model="auth.botName"
-        placeholder="Bot Name"
+        placeholder="봇 이름"
         class="mt-1 block w-full"
         @keydown.enter="handleOk"
       />
     </div>
     <div class="mb-4">
-      <label for="url-input" class="block text-sm font-medium">API Url</label>
+      <label for="url-input" class="block text-sm font-medium">API URL</label>
       <InputText
         id="url-input"
         v-model="auth.url"
@@ -177,13 +177,13 @@ onMounted(() => {
         class="mt-1 block w-full"
         @keydown.enter="handleOk"
       />
-      <span v-if="urlState === false" class="mt-2 text-sm text-red-500">API URL required</span>
+      <span v-if="urlState === false" class="mt-2 text-sm text-red-500">API URL이 필요합니다</span>
       <Message v-if="urlDuplicate" class="mt-2 text-sm" severity="warn">
-        This URL is already in use by another bot.
+        이 URL은 이미 다른 봇에서 사용 중입니다.
       </Message>
     </div>
     <div class="mb-4">
-      <label for="username-input" class="block text-sm font-medium">Username</label>
+      <label for="username-input" class="block text-sm font-medium">사용자명</label>
       <InputText
         id="username-input"
         v-model="auth.username"
@@ -194,51 +194,43 @@ onMounted(() => {
         @keydown.enter="handleOk"
       />
       <span v-if="nameState === false" class="mt-2 text-sm text-red-500">
-        Name and Password are required.
+        사용자명과 비밀번호가 필요합니다.
       </span>
     </div>
-    name: {{ nameState }} pwd:{{ pwdState }} url: {{ urlState }}
     <div class="mb-4">
-      <label for="password-input" class="block text-sm font-medium">Password</label>
-      <InputText
+      <label for="password-input" class="block text-sm font-medium">비밀번호</label>
+      <Password
         id="password-input"
         v-model="auth.password"
         required
-        type="password"
+        toggle-mask
         :invalid="pwdState === false"
+        :feedback="false"
         class="mt-1 block w-full"
+        input-class="w-full"
         @keydown.enter="handleOk"
       />
-      <span v-if="pwdState === false" class="mt-2 text-sm text-red-500"> Invalid Password </span>
     </div>
-    <div>
-      <Message v-if="errorMessage" class="mt-2 text-sm whitespace-pre-line" severity="warn">
-        {{ errorMessage }}
-        <br />
-        <span v-if="errorMessageCORS">
-          Please also check your bot's CORS configuration:
-          <a
-            href="https://www.freqtrade.io/en/latest/rest-api/#cors"
-            class="text-blue-500 underline"
-            >Freqtrade CORS documentation</a
-          >
-        </span>
-      </Message>
-    </div>
-    <div class="flex justify-end gap-2 mt-4">
-      <Button label="Reset" severity="danger" type="reset" />
+    <Message v-if="errorMessage" class="mt-2" severity="error">
+      {{ errorMessage }}
+      <div v-if="errorMessageCORS">
+        <a
+          target="_blank"
+          href="https://www.freqtrade.io/en/stable/rest-api/#cors"
+          class="font-bold text-primary-500 dark:text-primary-300"
+          >CORS 설정을 확인하세요</a
+        >
+      </div>
+    </Message>
+    <div class="flex justify-between mt-4">
       <Button
-        v-if="inModal"
-        label="Cancel"
-        severity="secondary"
         type="button"
-        @click="emitLoginResult(true)"
+        variant="outlined"
+        severity="secondary"
+        label="취소"
+        @click="$router.push('/')"
       />
-      <Button label="Submit" severity="primary" type="submit">
-        <template #icon>
-          <i-mdi-login />
-        </template>
-      </Button>
+      <Button type="submit" label="로그인" severity="primary" />
     </div>
   </form>
 </template>

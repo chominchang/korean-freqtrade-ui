@@ -103,7 +103,7 @@ onMounted(async () => {
         :min-h="4"
         drag-allow-from=".drag-header"
       >
-        <DraggableContainer :header="`Profit over time ${botStore.botCount > 1 ? 'combined' : ''}`">
+        <DraggableContainer :header="`기간별 수익 ${botStore.botCount > 1 ? '통합' : ''}`">
           <PeriodBreakdown multi-bot-view />
         </DraggableContainer>
       </GridItem>
@@ -118,7 +118,7 @@ onMounted(async () => {
         :min-h="4"
         drag-allow-from=".drag-header"
       >
-        <DraggableContainer header="Bot comparison">
+        <DraggableContainer header="봇 비교">
           <BotComparisonList />
         </DraggableContainer>
       </GridItem>
@@ -136,10 +136,10 @@ onMounted(async () => {
         <DraggableContainer>
           <template #header>
             <div class="flex justify-content-center">
-              Open Trades
+              진행 중인 거래
               <InfoBox
                 class="ms-2"
-                hint="Open trades of all selected bots. Click on a trade to go to the trade page for that trade/bot."
+                hint="선택된 모든 봇의 진행 중인 거래입니다. 거래를 클릭하면 해당 봇/거래의 거래 페이지로 이동합니다."
               />
             </div>
           </template>
@@ -157,7 +157,7 @@ onMounted(async () => {
         :min-h="4"
         drag-allow-from=".drag-header"
       >
-        <DraggableContainer header="Cumulative Profit">
+        <DraggableContainer header="누적 수익">
           <CumProfitChart
             :trades="botStore.allTradesSelectedBots"
             :open-trades="botStore.allOpenTradesSelectedBots"
@@ -179,10 +179,10 @@ onMounted(async () => {
         <DraggableContainer>
           <template #header>
             <div class="flex justify-content-center">
-              Closed Trades
+              종료된 거래
               <InfoBox
                 class="ms-2"
-                hint="Closed trades for all selected bots. Click on a trade to go to the trade page for that trade/bot."
+                hint="선택된 모든 봇의 종료된 거래입니다. 거래를 클릭하면 해당 봇/거래의 거래 페이지로 이동합니다."
               />
             </div>
           </template>
@@ -205,8 +205,8 @@ onMounted(async () => {
         :min-h="4"
         drag-allow-from=".drag-header"
       >
-        <DraggableContainer header="Profit Distribution">
-          <ProfitDistributionChart :trades="botStore.allTradesSelectedBots" :show-title="false" />
+        <DraggableContainer header="수익 분포">
+          <ProfitDistribution :trades="botStore.allTradesSelectedBots" :show-title="false" />
         </DraggableContainer>
       </GridItem>
       <GridItem
@@ -220,7 +220,7 @@ onMounted(async () => {
         :min-h="4"
         drag-allow-from=".drag-header"
       >
-        <DraggableContainer header="Trades Log">
+        <DraggableContainer header="거래 로그">
           <TradesLogChart :trades="botStore.allTradesSelectedBots" :show-title="false" />
         </DraggableContainer>
       </GridItem>

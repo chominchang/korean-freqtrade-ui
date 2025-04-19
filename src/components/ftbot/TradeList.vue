@@ -12,12 +12,12 @@ enum ModalReasons {
 
 const props = defineProps({
   trades: { required: true, type: Array as () => Array<Trade> },
-  title: { default: 'Trades', type: String },
+  title: { default: '거래', type: String },
   stakeCurrency: { required: false, default: '', type: String },
   activeTrades: { default: false, type: Boolean },
   showFilter: { default: false, type: Boolean },
   multiBotView: { default: false, type: Boolean },
-  emptyText: { default: 'No Trades to show.', type: String },
+  emptyText: { default: '표시할 거래가 없습니다.', type: String },
 });
 const botStore = useBotStore();
 const router = useRouter();
@@ -40,41 +40,41 @@ function formatPriceWithDecimals(price) {
 
 const tableFields = ref([
   { field: 'trade_id', header: 'ID' },
-  { field: 'pair', header: 'Pair' },
-  { field: 'amount', header: 'Amount' },
+  { field: 'pair', header: '페어' },
+  { field: 'amount', header: '수량' },
   props.activeTrades
-    ? { field: 'stake_amount', header: 'Stake amount' }
-    : { field: 'max_stake_amount', header: 'Total stake amount' },
+    ? { field: 'stake_amount', header: '스테이크 금액' }
+    : { field: 'max_stake_amount', header: '총 스테이크 금액' },
   {
     field: 'open_rate',
-    header: 'Open rate',
+    header: '진입 가격',
   },
   {
     field: props.activeTrades ? 'current_rate' : 'close_rate',
-    header: props.activeTrades ? 'Current rate' : 'Close rate',
+    header: props.activeTrades ? '현재 가격' : '종료 가격',
   },
   {
     field: 'profit',
-    header: props.activeTrades ? 'Current profit %' : 'Profit %',
+    header: props.activeTrades ? '현재 수익 %' : '수익 %',
   },
-  { field: 'open_timestamp', header: 'Open date' },
+  { field: 'open_timestamp', header: '진입 날짜' },
   ...(props.activeTrades
     ? [{ field: 'actions', header: '' }]
     : [
-        { field: 'close_timestamp', header: 'Close date' },
-        { field: 'exit_reason', header: 'Close Reason' },
+        { field: 'close_timestamp', header: '종료 날짜' },
+        { field: 'exit_reason', header: '종료 이유' },
       ]),
 ]);
 
 if (props.multiBotView) {
-  tableFields.value.unshift({ field: 'botName', header: 'Bot' });
+  tableFields.value.unshift({ field: 'botName', header: '봇' });
 }
 
 const feOrderType = ref<string | undefined>(undefined);
 function forceExitHandler(item: Trade, ordertype: string | undefined = undefined) {
   feTrade.value = item;
   confirmExitValue.value = ModalReasons.forceExit;
-  confirmExitText.value = `Really exit trade ${item.trade_id} (Pair ${item.pair}) using ${ordertype} Order?`;
+  confirmExitText.value = `정말로 거래 ${item.trade_id} (페어 ${item.pair})를 ${ordertype} 주문으로 종료하시겠습니까?`;
   feOrderType.value = ordertype;
   if (settingsStore.confirmDialog === true) {
     removeTradeVisible.value = true;
@@ -117,7 +117,7 @@ function forceExitExecuter() {
 }
 
 function removeTradeHandler(item: Trade) {
-  confirmExitText.value = `Really delete trade ${item.trade_id} (Pair ${item.pair})?`;
+  confirmExitText.value = `정말로 거래 ${item.trade_id} (페어 ${item.pair})를 삭제하시겠습니까?`;
   confirmExitValue.value = ModalReasons.removeTrade;
   feTrade.value = item;
   removeTradeVisible.value = true;
@@ -129,7 +129,7 @@ function forceExitPartialHandler(item: Trade) {
 }
 
 function cancelOpenOrderHandler(item: Trade) {
-  confirmExitText.value = `Cancel open order for trade ${item.trade_id} (Pair ${item.pair})?`;
+  confirmExitText.value = `거래 ${item.trade_id} (페어 ${item.pair})의 미체결 주문을 취소하시겠습니까?`;
   feTrade.value = item;
   confirmExitValue.value = ModalReasons.cancelOpenOrder;
   removeTradeVisible.value = true;
@@ -258,7 +258,7 @@ watch(
 
       <template v-if="showFilter" #header>
         <div class="flex justify-end gap-2 p-2">
-          <InputText v-model="filterText" placeholder="Filter" class="w-64" size="small" />
+          <InputText v-model="filterText" placeholder="필터" class="w-64" size="small" />
         </div>
       </template>
     </DataTable>
@@ -275,11 +275,11 @@ watch(
       position-increase
     />
 
-    <Dialog v-model:visible="removeTradeVisible" :modal="true" header="Exit trade">
+    <Dialog v-model:visible="removeTradeVisible" :modal="true" header="거래 종료">
       <p>{{ confirmExitText }}</p>
       <template #footer>
-        <Button label="Cancel" @click="removeTradeVisible = false" />
-        <Button label="Confirm" severity="danger" @click="forceExitExecuter" />
+        <Button label="취소" @click="removeTradeVisible = false" />
+        <Button label="확인" severity="danger" @click="forceExitExecuter" />
       </template>
     </Dialog>
   </div>

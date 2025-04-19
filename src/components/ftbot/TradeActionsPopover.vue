@@ -52,7 +52,7 @@ const popover = ref<InstanceType<typeof Popover> | null>(null);
       class="btn-xs"
       size="small"
       severity="secondary"
-      title="Actions"
+      title="작업"
       @click="popover?.toggle"
     >
       <i-mdi-gesture-tap />
@@ -60,7 +60,7 @@ const popover = ref<InstanceType<typeof Popover> | null>(null);
     <Popover
       ref="popover"
       :target="`btn-actions-${id}`"
-      :title="`Actions for ${trade.pair}`"
+      :title="`${trade.pair}에 대한 작업`"
       triggers="manual"
       placement="left"
     >
@@ -79,7 +79,7 @@ const popover = ref<InstanceType<typeof Popover> | null>(null);
         class="mt-1 w-full text-start"
         size="small"
         severity="secondary"
-        label="Close Actions menu"
+        label="작업 메뉴 닫기"
         @click="popover?.hide"
       >
         <template #icon><i-mdi-cancel class="me-1" /></template>

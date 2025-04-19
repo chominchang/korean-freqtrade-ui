@@ -51,14 +51,14 @@ function scrollToBottom() {
         id="refresh-logs"
         severity="secondary"
         size="small"
-        title="Reload Logs"
+        title="로그 새로고침"
         @click="refreshLogs"
       >
         <template #icon>
           <i-mdi-refresh />
         </template>
       </Button>
-      <Button size="small" title="Scroll to bottom" severity="secondary" @click="scrollToBottom">
+      <Button size="small" title="맨 아래로 스크롤" severity="secondary" @click="scrollToBottom">
         <template #icon>
           <i-mdi-arrow-down-thick />
         </template>

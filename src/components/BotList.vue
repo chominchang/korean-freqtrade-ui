@@ -54,7 +54,7 @@ const stopEditBot = (botId: string) => {
 
 <template>
   <div v-if="botStore.botCount > 0">
-    <h3 v-if="!small" class="font-bold text-2xl mb-2">Available bots</h3>
+    <h3 v-if="!small" class="font-bold text-2xl mb-2">사용 가능한 봇</h3>
     <ul
       ref="sortContainer"
       class="flex flex-col divide-y border-x border-surface-500 rounded-sm border-y divide-solid divide-surface-500"
@@ -65,7 +65,7 @@ const stopEditBot = (botId: string) => {
         :active="bot.botId === botStore.selectedBot"
         button
         :title="`${bot.botId} - ${bot.botName} - ${bot.botUrl} - ${
-          botStore.botStores[bot.botId].isBotLoggedIn ? '' : 'Login info expired!'
+          botStore.botStores[bot.botId].isBotLoggedIn ? '' : '로그인 정보가 만료되었습니다!'
         }`"
         class="flex items-center p-2"
         :class="{
@@ -90,6 +90,6 @@ const stopEditBot = (botId: string) => {
         />
       </li>
     </ul>
-    <LoginModal v-if="!small" ref="loginModal" class="mt-2" login-text="Add new bot" />
+    <LoginModal v-if="!small" ref="loginModal" class="mt-2" login-text="새 봇 추가" />
   </div>
 </template>
