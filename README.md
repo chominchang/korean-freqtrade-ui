@@ -1,117 +1,53 @@
-# FreqUI
+# FreqUI 한국어 버전
 
-[![Open in Visual Studio Code](https://img.shields.io/static/v1?logo=visualstudiocode&label=&message=Open%20in%20Visual%20Studio%20Code&labelColor=2c2c32&color=007acc&logoColor=007acc)](https://open.vscode.dev/freqtrade/frequi)
-[![Freqtrade CI](https://github.com/freqtrade/frequi/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/freqtrade/frequi/actions/)
+이 프로젝트는 [Freqtrade](https://github.com/freqtrade/freqtrade)의 웹 인터페이스인 FreqUI를 한국어로 번역한 버전입니다.
 
-Freqtrade UI build with [Vue.js](https://vuejs.org/) and [primevue](https://primevue.org/).
+## 주요 특징
 
-## WARNING
+- 모든 UI 요소의 한국어 번역
+- 차트 관련 설정 및 기능 한국어화
+- 거래 내역 및 설정 화면 한국어화
+- 대시보드 및 통계 정보 한국어화
 
-This project is still in its early stages (consider it alpha), and is not yet stable nor recommended to be used for production usages.
+## 설치 방법
 
-## Run this project
+### 방법 1: Freqtrade의 install-ui 명령어 사용 (권장)
 
-Using FreqUI, does require [freqtrade](https://github.com/freqtrade/freqtrade) to be setup and running.
-In newer versions (2021.2 and newer), freqUI is builtin to freqtrade, so manual setup of freqUI will no longer be necessary unless you want to modify freqUI.
-Instructions for this end-user setup can be found in the [freqtrade API documentation](https://www.freqtrade.io/en/stable/rest-api/).
-
-### Running a standalone version of FreqUI
-
-Using Docker, you can also run a pre-built docker image of FreqUI.
+Freqtrade가 이미 설치되어 있다면, 다음 명령어를 사용하여 한국어 UI를 설치할 수 있습니다:
 
 ```bash
-docker compose up -d
+python -m freqtrade install-ui
 ```
 
-This will start a pre-built container with FreqUI running on port 3000 - which defaults to the latest version of freqUI.
-You can use `docker compose pull` to update to the latest version of the UI.
+이 명령어는 자동으로 최신 한국어 UI를 다운로드하고 설치합니다.
 
-Please note: This is a standalone version of FreqUI, and will still require a correctly configured freqtrade bot.
-You'll need to correctly configure [CORS](https://www.freqtrade.io/en/stable/rest-api/#cors) in freqtrade to allow FreqUI to connect to the API.
+### 방법 2: 수동 설치
 
-## Developer project setup
+1. 이 저장소의 [릴리스 페이지](https://github.com/chominchang/korean-freqtrade-ui/releases)에서 최신 소스 코드(`Source code (zip)`)를 다운로드합니다.
+2. 압축을 풀고 내용물을 Freqtrade의 UI 디렉토리(`freqtrade/user_data/ui`)에 복사합니다.
 
-It will require [freqtrade](https://github.com/freqtrade/freqtrade) to be running on the same host with the API enabled under (`localhost:8080`). You can either use the webpack proxy (port can be changed in `vue.config.js`) - or connect directly to the API (recommended).
+## 사용 방법
 
-You will also have to have CORS for freqtrade configured correctly based on the [freqtrade documentation](https://www.freqtrade.io/en/stable/rest-api/#cors).
-Most likely, the correct entry will be `http://localhost:3000` or `http://127.0.0.1:3000` - but the URL must match the URL you use to access FreqUI.
-Ports can vary, so check the URL you're using.
+UI가 설치된 후에는 Freqtrade의 웹 인터페이스를 활성화하고 접속해야 합니다:
 
-### Project setup
+1. Freqtrade 실행 시 `--enable-ui` 옵션을 추가합니다:
+   ```bash
+   freqtrade trade --config config.json --enable-ui
+   ```
 
-```
-pnpm install
-```
+2. 기본적으로 UI는 `http://localhost:8080`에서 접근할 수 있습니다. 원격 서버에 설치한 경우 해당 서버의 IP 주소나 도메인 이름을, 그리고 포트를 사용하세요.
 
-### Compiles and hot-reloads for development
+## 번역 내역
 
-```
-pnpm run dev
-```
+- 2025-04-20: 초기 한국어 번역 완료
+- 모든 주요 UI 요소 번역
+- 차트 관련 설정 및 기능 번역
+- 거래 화면 및 설정 메뉴 번역
 
-### Compiles and minifies for production
+## 기여하기
 
-```
-pnpm run build
-```
+번역 오류나 개선 사항이 있다면 이슈를 등록하거나 Pull Request를 보내주세요.
 
-### Lints and fixes files
+## 라이센스
 
-```
-pnpm run lint
-```
-
-### Build and run docker version
-
-```
-docker-compose build
-docker-compose up -d
-
-# Access using http://localhost:3000/
-```
-
-
-### Customize configuration
-
-See [Configuration Reference](https://cli.vuejs.org/config/).
-
-## Project setup for docker (developing inside dev container) without vscode
-
-### Built dev docker image and run container(s) detached
-
-```
-cd .devcontainer
-docker-compose up -d
-```
-
-### Go inside web-service container and serve
-
-```
-docker-compose exec web /bin/bash
-```
-
-then
-
-```
-pnpm run dev
-```
-
-## Project setup for vscode and docker (developing inside dev container) on Linux
-
-The goal is to have a complete dev environment very quickly and isolated.
-
-### Install missing tools if needed
-
-Follow [getting started](https://code.visualstudio.com/docs/remote/containers#_getting-started) section.
-
-### Build your dev container
-
-View > Command palette > Enter: Remote-Containers rebuild container
-
-### Serve your local server
-
-```
-pnpm run dev
-```
-
-You now have useful vscode extensions, git support, your command history of the project.
+이 프로젝트는 원본 Freqtrade와 동일한 [라이센스](https://github.com/freqtrade/freqtrade/blob/develop/LICENSE)를 따릅니다.
