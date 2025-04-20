@@ -60,7 +60,7 @@ jobs:
         context: .
         file: ./docker/Dockerfile
         tags: ${{ steps.meta.outputs.tags }}
-        outputs: type=image,name=chominchang/korean-frequi,push-by-digest=true,name-canonical=true,push=true
+        outputs: type=image,name=chominchang94/korean-frequi,push-by-digest=true,name-canonical=true,push=true
 
     - name: Export digest
       run: |
@@ -102,7 +102,7 @@ jobs:
       with:
         # list of Docker images to use as base name for tags
         images: |
-          chominchang/korean-frequi
+          chominchang94/korean-frequi
           ghcr.io/chominchang/korean-frequi
         # generate Docker tags based on the following events/attributes
         tags: |
@@ -127,8 +127,8 @@ jobs:
       working-directory: /tmp/digests
       run: |
         docker buildx imagetools create $(jq -cr '.tags | map("-t " + .) | join(" ")' <<< "$DOCKER_METADATA_OUTPUT_JSON") \
-          $(printf 'chominchang/korean-frequi@sha256:%s ' *)
+          $(printf 'chominchang94/korean-frequi@sha256:%s ' *)
 
     - name: Inspect image
       run: |
-        docker buildx imagetools inspect chominchang/korean-frequi:${{ steps.meta.outputs.version }}
+        docker buildx imagetools inspect chominchang94/korean-frequi:${{ steps.meta.outputs.version }}
