@@ -48,7 +48,7 @@ jobs:
       uses: actions/download-artifact@v4
       with:
         path: ./dist/
-        name: freqUI
+        name: freqUI-22  # 여기를 freqUI에서 freqUI-22로 변경
 
     - name: Build and push Docker image
       id: build
