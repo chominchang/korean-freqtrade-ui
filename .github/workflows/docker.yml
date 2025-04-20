@@ -71,8 +71,8 @@ jobs:
         platforms: ${{ matrix.platform }}
         context: .
         file: ./docker/Dockerfile
-        tags: chominchang94/korean-frequi:latest  # 직접 태그 지정
-        outputs: type=image,name=chominchang94/korean-frequi,push-by-digest=true,name-canonical=true,push=true
+        tags: chominchang94/korean-frequi:latest
+        push: true
 
     - name: Export digest
       run: |
