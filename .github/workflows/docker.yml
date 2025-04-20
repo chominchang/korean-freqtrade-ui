@@ -48,8 +48,7 @@ jobs:
       uses: actions/download-artifact@v4
       with:
         path: ./dist/
-        # Use node-22 build.
-        name: freqUI-22
+        name: freqUI
 
     - name: Build and push Docker image
       id: build
@@ -61,7 +60,7 @@ jobs:
         context: .
         file: ./docker/Dockerfile
         tags: ${{ steps.meta.outputs.tags }}
-        outputs: type=image,name=freqtradeorg/frequi,push-by-digest=true,name-canonical=true,push=true
+        outputs: type=image,name=chominchang/korean-frequi,push-by-digest=true,name-canonical=true,push=true
 
     - name: Export digest
       run: |
@@ -103,8 +102,8 @@ jobs:
       with:
         # list of Docker images to use as base name for tags
         images: |
-          freqtradeorg/frequi
-          ghcr.io/freqtrade/frequi
+          chominchang/korean-frequi
+          ghcr.io/chominchang/korean-frequi
         # generate Docker tags based on the following events/attributes
         tags: |
            type=raw,value=latest,enable=${{ github.ref == format('refs/heads/{0}', 'main') }}
@@ -128,8 +127,8 @@ jobs:
       working-directory: /tmp/digests
       run: |
         docker buildx imagetools create $(jq -cr '.tags | map("-t " + .) | join(" ")' <<< "$DOCKER_METADATA_OUTPUT_JSON") \
-          $(printf 'freqtradeorg/frequi@sha256:%s ' *)
+          $(printf 'chominchang/korean-frequi@sha256:%s ' *)
 
     - name: Inspect image
       run: |
-        docker buildx imagetools inspect freqtradeorg/frequi:${{ steps.meta.outputs.version }}
+        docker buildx imagetools inspect chominchang/korean-frequi:${{ steps.meta.outputs.version }}
