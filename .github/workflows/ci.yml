@@ -15,6 +15,7 @@ on:
 permissions:
   contents: write
   packages: write
+  id-token: write  # 추가
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -42,7 +43,7 @@ jobs:
     - name: Archive artifacts
       uses: actions/upload-artifact@v4
       with:
-        name: freqUI-22  # freqUI에서 freqUI-22로 변경
+        name: freqUI-22
         path: |
           dist
           !dist/**/*.map
@@ -70,6 +71,7 @@ jobs:
     permissions:
       contents: write
       packages: write
+      id-token: write  # 추가
     secrets:
       DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
       DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
