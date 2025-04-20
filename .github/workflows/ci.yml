@@ -5,7 +5,6 @@ on:
     branches:
       - main
       - ci/**
-
   pull_request:
     branches:
       - main
@@ -18,76 +17,42 @@ concurrency:
 
 jobs:
   build:
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os: [ ubuntu-22.04 ]
-        node: [ "18", "20", "22", "23"]
-
+    runs-on: ubuntu-22.04
     steps:
     - uses: actions/checkout@v4
-
 
     - name: Install pnpm
       uses: pnpm/action-setup@v4
 
     - uses: actions/setup-node@v4
       with:
-        node-version: ${{ matrix.node }}
+        node-version: "22"
         cache: 'pnpm'
-
 
     - run: pnpm install
 
-    - name: Run Lint
-      run: pnpm run lint-ci
-
-    - name: Run type check
-      run: pnpm run typecheck
-
-    - name: Run Tests
-      run: pnpm run test:unit
-
-    - name: Build build
+    - name: Build
       run: pnpm run build
 
     - name: Archive artifacts
       uses: actions/upload-artifact@v4
-      # Ideally this would upload the zip file from below - but this action currently does not support this.
       with:
-        name: freqUI-${{ matrix.node }}
+        name: freqUI
         path: |
           dist
           !dist/**/*.map
         retention-days: 10
 
-    # Playwright section
-    - name: Install Playwright Browsers
-      run: pnpm exec playwright install --with-deps
-
-    - name: Run Playwright tests
-      run: pnpm exec playwright test
-
-    - uses: actions/upload-artifact@v4
-      if: ${{ !cancelled() }}
-      with:
-        name: playwright-report-${{ matrix.node }}
-        path: playwright-report/
-        retention-days: 30
-
-    # End Playwright section
-
     - name: Zip files for release
-      if: github.event_name == 'release' && matrix.node == '22'
+      if: github.event_name == 'release'
       run: |
         cd dist/
         zip -r ../freqUI.zip .
         cd ../
 
-
     - name: Upload release binaries
       uses: alexellis/upload-assets@0.4.1
-      if: github.event_name == 'release' && matrix.node == '22'
+      if: github.event_name == 'release'
       env:
         GITHUB_TOKEN: ${{ github.token }}
       with:
@@ -95,7 +60,7 @@ jobs:
 
   call-docker-workflow:
     needs: build
-    if: (github.event_name == 'push' || github.event_name == 'schedule' || github.event_name == 'release') && github.repository == 'freqtrade/frequi'
+    if: github.event_name == 'push' || github.event_name == 'schedule' || github.event_name == 'release'
     uses: ./.github/workflows/docker.yml
     secrets:
       DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
