@@ -1,0 +1,2 @@
+import{_ as n}from"./DraggableContainer.vue_vue_type_script_setup_true_lang-DHspYSQf.js";import{t as a,c,a as r,b as o,h as s,b$ as _}from"./index-B_v6adOj.js";const i={},m={class:"border max-w-xl mx-auto p-4"};function f(l,d){const e=_,t=n;return r(),c("div",m,[o(t,{header:"프리퀀트레이드 봇 로그인"},{default:s(()=>[o(e,{ref:"loginForm"},null,512)]),_:1})])}const u=a(i,[["render",f]]);export{u as default};
+//# sourceMappingURL=LoginView-CHqht1C5.js.map
