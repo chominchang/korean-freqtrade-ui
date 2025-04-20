@@ -8,12 +8,12 @@ const configNames = computed(() =>
 );
 </script>
 <template>
-  <Panel toggleable header="Blacklist" collapsed>
+  <Panel toggleable header="블랙리스트" collapsed>
     <div class="flex mb-4 items-center gap-2">
-      <span class="col-auto">Copy from:</span>
+      <span class="col-auto">복사 출처:</span>
       <Select v-model="copyFromConfig" size="small" class="grow" :options="configNames" />
       <Button
-        title="Copy"
+        title="복사"
         size="small"
         severity="secondary"
         @click="pairlistStore.duplicateBlacklist(copyFromConfig)"
@@ -33,6 +33,6 @@ const configNames = computed(() =>
         </Button>
       </InputGroupAddon>
     </InputGroup>
-    <Button size="small" @click="pairlistStore.addToBlacklist()">Add</Button>
+    <Button size="small" @click="pairlistStore.addToBlacklist()">추가</Button>
   </Panel>
 </template>

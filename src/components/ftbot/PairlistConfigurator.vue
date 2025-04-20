@@ -99,13 +99,13 @@ watch(
       <PairlistConfigActions />
       <div class="border rounded-sm border-surface-500 p-2 mb-2">
         <div class="flex items-center gap-2 my-2">
-          <span class="col-auto">Stake currency: </span>
+          <span class="col-auto">스테이크 통화: </span>
           <InputText v-model="pairlistStore.stakeCurrency" size="small" />
         </div>
 
         <div class="mb-2 border rounded-sm border-surface-500 p-2 text-start">
           <BaseCheckbox v-model="pairlistStore.customExchange" class="mb-2">
-            Custom Exchange
+            커스텀 거래소
           </BaseCheckbox>
           <Transition name="fade">
             <ExchangeSelect
@@ -121,8 +121,7 @@ watch(
         class="my-2"
         severity="warn"
       >
-        First entry in the pairlist must be a Generating pairlist, like StaticPairList or
-        VolumePairList.
+        페어리스트의 첫 번째 항목은 StaticPairList 또는 VolumePairList와 같은 생성 페어리스트여야 합니다.
       </Message>
       <div
         ref="pairlistConfigsEl"
@@ -147,8 +146,8 @@ watch(
         option-label="value"
         option-value="value"
         :options="[
-          { value: 'Config' },
-          { value: 'Results', disabled: pairlistStore.whitelist.length === 0 },
+          { value: '설정' },
+          { value: '결과', disabled: pairlistStore.whitelist.length === 0 },
         ]"
         option-disabled="disabled"
       >
@@ -156,13 +155,13 @@ watch(
       </SelectButton>
       <div class="relative overflow-auto">
         <CopyableTextfield
-          v-if="selectedView === 'Config'"
+          v-if="selectedView === '설정'"
           class="lg:a22bsolute w-full"
           :content="pairlistStore.configJSON"
           :is-valid="pairlistStore.pairlistValid"
         />
         <CopyableTextfield
-          v-if="selectedView === 'Results'"
+          v-if="selectedView === '결과'"
           class="lg:abs22olute w-full"
           :content="pairlistStore.whitelist"
         />
@@ -181,7 +180,7 @@ watch(
 }
 
 .empty:after {
-  content: 'Drag pairlist here';
+  content: '여기에 페어리스트 끌어다 놓기';
   position: absolute;
   align-self: center;
   font-size: 1.1rem;

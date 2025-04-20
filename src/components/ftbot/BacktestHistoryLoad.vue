@@ -16,8 +16,8 @@ onMounted(() => {
 
 function deleteBacktestResult(result: BacktestHistoryEntry) {
   const msg: MsgBoxObject = {
-    title: 'Delete result',
-    message: `Delete result ${result.filename} from disk?`,
+    title: '결과 삭제',
+    message: `디스크에서 결과 ${result.filename}을(를) 삭제하시겠습니까?`,
     accept: () => {
       botStore.activeBot.deleteBacktestHistoryResult(result);
     },
@@ -41,8 +41,8 @@ function rowClick(row) {
   <div>
     <Button
       class="float-end"
-      title="Refresh"
-      aria-label="Refresh"
+      title="새로고침"
+      aria-label="새로고침"
       variant="outlined"
       severity="secondary"
       @click="botStore.activeBot.getBacktestHistory"
@@ -50,8 +50,7 @@ function rowClick(row) {
       <i-mdi-refresh />
     </Button>
     <p>
-      Load Historic results from disk. You can click on multiple results to load all of them into
-      freqUI.
+      디스크에서 과거 결과를 불러옵니다. 여러 결과를 클릭하여 모두 freqUI로 불러올 수 있습니다.
     </p>
     <div v-if="botStore.activeBot.backtestHistoryList.length > 0" class="flex align-center">
       <InputText
@@ -59,8 +58,8 @@ function rowClick(row) {
         v-model="filterText"
         type="text"
         size="small"
-        placeholder="Filter results"
-        title="Filter results"
+        placeholder="결과 필터링"
+        title="결과 필터링"
       />
     </div>
     <DataTable
@@ -75,8 +74,8 @@ function rowClick(row) {
       :value="filteredList"
       @row-click="rowClick"
     >
-      <Column field="strategy" header="Strategy2"></Column>
-      <Column field="timeframe" header="Details">
+      <Column field="strategy" header="전략"></Column>
+      <Column field="timeframe" header="상세 정보">
         <template #body="{ data }">
           <strong>{{ data.timeframe }}</strong>
           <span v-if="data.backtest_start_ts && data.backtest_end_ts" class="ms-1">
@@ -86,13 +85,13 @@ function rowClick(row) {
           >
         </template>
       </Column>
-      <Column field="backtest_start_time" header="Backtest Time">
+      <Column field="backtest_start_time" header="백테스트 시간">
         <template #body="{ data }">
           <DateTimeTZ :date="data.backtest_start_time * 1000" />
         </template>
       </Column>
-      <Column field="filename" header="Filename"></Column>
-      <Column field="actions" header="Actions">
+      <Column field="filename" header="파일명"></Column>
+      <Column field="actions" header="작업">
         <template #body="{ data }">
           <div class="flex items-center">
             <InfoBox
@@ -104,7 +103,7 @@ function rowClick(row) {
               v-if="botStore.activeBot.botApiVersion >= 2.31"
               class="ms-1"
               size="small"
-              title="Load this Result."
+              title="이 결과 불러오기"
               :disabled="data.run_id in botStore.activeBot.backtestHistory"
               @click.stop="botStore.activeBot.getBacktestHistoryResult(data)"
             >
@@ -117,7 +116,7 @@ function rowClick(row) {
               class="ms-1"
               size="small"
               severity="secondary"
-              title="Delete this Result."
+              title="이 결과 삭제하기"
               :disabled="data.run_id in botStore.activeBot.backtestHistory"
               @click.stop="deleteBacktestResult(data)"
             >

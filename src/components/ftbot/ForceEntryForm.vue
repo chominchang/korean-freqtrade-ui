@@ -21,12 +21,12 @@ const orderSide = ref<OrderSides>(OrderSides.long);
 const enterTag = ref('force_entry');
 
 const orderTypeOptions = [
-  { value: 'market', text: 'Market' },
-  { value: 'limit', text: 'Limit' },
+  { value: 'market', text: '시장가' },
+  { value: 'limit', text: '지정가' },
 ];
 const orderSideOptions = [
-  { value: 'long', text: 'Long' },
-  { value: 'short', text: 'Short' },
+  { value: 'long', text: '롱' },
+  { value: 'short', text: '숏' },
 ];
 
 const checkFormValidity = () => {
@@ -88,14 +88,14 @@ const handleEntry = () => {
 <template>
   <Dialog
     v-model:visible="model"
-    :header="positionIncrease ? `Increasing position for ${pair}` : 'Force entering a trade'"
+    :header="positionIncrease ? `${pair} 포지션 증가` : '거래 강제 진입'"
     modal
     @show="resetForm"
     @hide="resetForm"
   >
     <form ref="form" class="space-y-4 md:min-w-[32rem]" @submit.prevent="handleSubmit">
       <div v-if="botStore.activeBot.botApiVersion >= 2.13 && botStore.activeBot.shortAllowed">
-        <label class="block font-medium mb-1">Order direction (Long or Short)</label>
+        <label class="block font-medium mb-1">주문 방향 (롱 또는 숏)</label>
         <SelectButton
           v-model="orderSide"
           :options="orderSideOptions"
@@ -108,7 +108,7 @@ const handleEntry = () => {
       </div>
 
       <div>
-        <label for="pair-input" class="block font-medium mb-1">Pair</label>
+        <label for="pair-input" class="block font-medium mb-1">페어</label>
         <InputText
           id="pair-input"
           v-model="selectedPair"
@@ -121,7 +121,7 @@ const handleEntry = () => {
       </div>
 
       <div>
-        <label for="price-input" class="block font-medium mb-1">Price [optional]</label>
+        <label for="price-input" class="block font-medium mb-1">가격 [선택사항]</label>
         <InputNumber
           id="price-input"
           v-model="price"
@@ -136,7 +136,7 @@ const handleEntry = () => {
 
       <div>
         <label for="stake-input" class="block font-medium mb-1"
-          >* Stake-amount in {{ botStore.activeBot.stakeCurrency }} [optional]</label
+          >* {{ botStore.activeBot.stakeCurrency }} 단위 스테이크 금액 [선택사항]</label
         >
         <InputNumber
           id="stake-input"
@@ -151,7 +151,7 @@ const handleEntry = () => {
 
       <div v-if="botStore.activeBot.botApiVersion > 2.16 && botStore.activeBot.shortAllowed">
         <label for="leverage-input" class="block font-medium mb-1"
-          >Leverage to apply [optional]</label
+          >레버리지 설정 [선택사항]</label
         >
         <InputNumber
           id="leverage-input"
@@ -166,7 +166,7 @@ const handleEntry = () => {
       </div>
 
       <div>
-        <label class="block text-sm font-medium mb-1">OrderType</label>
+        <label class="block text-sm font-medium mb-1">주문 유형</label>
         <SelectButton
           v-model="ordertype"
           :options="orderTypeOptions"
@@ -179,7 +179,7 @@ const handleEntry = () => {
 
       <div v-if="botStore.activeBot.botApiVersion > 1.16">
         <label for="enterTag-input" class="block text-sm font-medium mb-1"
-          >* Custom entry tag [optional]</label
+          >* 사용자 지정 진입 태그 [선택사항]</label
         >
         <InputText id="enterTag-input" v-model="enterTag" class="w-full" />
       </div>
@@ -187,8 +187,8 @@ const handleEntry = () => {
 
     <template #footer>
       <div class="flex justify-end gap-2">
-        <Button severity="secondary" size="small" @click="model = false"> Cancel </Button>
-        <Button severity="primary" size="small" @click="handleEntry"> Enter Position </Button>
+        <Button severity="secondary" size="small" @click="model = false"> 취소 </Button>
+        <Button severity="primary" size="small" @click="handleEntry"> 포지션 진입 </Button>
       </div>
     </template>
   </Dialog>

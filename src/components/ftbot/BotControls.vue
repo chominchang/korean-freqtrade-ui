@@ -17,8 +17,8 @@ const isRunning = computed((): boolean => {
 
 const handleStopBot = () => {
   const msg: MsgBoxObject = {
-    title: 'Stop Bot',
-    message: 'Stop the bot loop from running?',
+    title: '봇 중지',
+    message: '봇 루프 실행을 중지하시겠습니까?',
     accept: () => {
       botStore.activeBot.stopBot();
     },
@@ -28,9 +28,9 @@ const handleStopBot = () => {
 
 const handleStopBuy = () => {
   const msg: MsgBoxObject = {
-    title: 'Pause - Stop Entering',
+    title: '일시 중지 - 진입 중지',
     message:
-      'Freqtrade will continue to handle open trades, but will not enter new trades or increase position sizes.',
+      'Freqtrade는 열린 거래는 계속 처리하지만, 새로운 거래를 시작하거나 포지션 크기를 늘리지 않습니다.',
     accept: () => {
       botStore.activeBot.stopBuy();
     },
@@ -40,8 +40,8 @@ const handleStopBuy = () => {
 
 const handleReloadConfig = () => {
   const msg: MsgBoxObject = {
-    title: 'Reload',
-    message: 'Reload configuration (including strategy)?',
+    title: '새로고침',
+    message: '설정(전략 포함)을 다시 로드하시겠습니까?',
     accept: () => {
       console.log('reload...');
       botStore.activeBot.reloadConfig();
@@ -52,8 +52,8 @@ const handleReloadConfig = () => {
 
 const handleForceExit = () => {
   const msg: MsgBoxObject = {
-    title: 'ForceExit all',
-    message: 'Really forceexit ALL trades?',
+    title: '모든 거래 강제 종료',
+    message: '정말로 모든 거래를 강제 종료하시겠습니까?',
     accept: () => {
       const payload: ForceSellPayload = {
         tradeid: 'all',
@@ -72,7 +72,7 @@ const handleForceExit = () => {
       size="large"
       severity="secondary"
       :disabled="!botStore.activeBot.isTrading || isRunning"
-      title="Start Trading"
+      title="거래 시작"
       @click="botStore.activeBot.startBot()"
     >
       <template #icon>
@@ -83,7 +83,7 @@ const handleForceExit = () => {
       size="large"
       severity="secondary"
       :disabled="!botStore.activeBot.isTrading || !isRunning"
-      title="Stop Trading - Also stops handling open trades."
+      title="거래 중지 - 열린 거래 처리도 중지합니다."
       @click="handleStopBot()"
     >
       <template #icon>
@@ -94,7 +94,7 @@ const handleForceExit = () => {
       size="large"
       severity="secondary"
       :disabled="!botStore.activeBot.isTrading || !isRunning"
-      title="Pause (StopBuy) - Freqtrade will continue to handle open trades, but will not enter new trades or increase position sizes."
+      title="일시 중지 (매수 중지) - Freqtrade는 열린 거래는 계속 처리하지만, 새로운 거래를 시작하거나 포지션 크기를 늘리지 않습니다."
       @click="handleStopBuy()"
     >
       <template #icon>
@@ -105,7 +105,7 @@ const handleForceExit = () => {
       size="large"
       severity="secondary"
       :disabled="!botStore.activeBot.isTrading"
-      title="Reload Config - reloads configuration including strategy, resetting all settings changed on the fly."
+      title="설정 새로고침 - 전략을 포함한 설정을 다시 로드하고, 즉석에서 변경된 모든 설정을 재설정합니다."
       @click="handleReloadConfig()"
     >
       <template #icon>
@@ -116,7 +116,7 @@ const handleForceExit = () => {
       severity="secondary"
       size="large"
       :disabled="!botStore.activeBot.isTrading"
-      title="Force exit all"
+      title="모든 거래 강제 종료"
       @click="handleForceExit()"
     >
       <template #icon>
@@ -128,7 +128,7 @@ const handleForceExit = () => {
       size="large"
       severity="secondary"
       :disabled="!botStore.activeBot.isTrading || !isRunning"
-      title="Force enter - Immediately enter a trade at an optional price. Exits are then handled according to strategy rules."
+      title="강제 진입 - 즉시 선택적 가격으로 거래를 시작합니다. 종료는 전략 규칙에 따라 처리됩니다."
       @click="forceEnter = true"
     >
       <template #icon>
@@ -140,7 +140,7 @@ const handleForceExit = () => {
       size="large"
       severity="secondary"
       :disabled="botStore.activeBot.isTrading"
-      title="Start Trading mode"
+      title="거래 모드 시작"
       @click="botStore.activeBot.startTrade()"
     >
       <template #icon>
