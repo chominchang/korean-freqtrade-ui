@@ -48,7 +48,19 @@ jobs:
       uses: actions/download-artifact@v4
       with:
         path: ./dist/
-        name: freqUI-22  # 여기를 freqUI에서 freqUI-22로 변경
+        name: freqUI-22
+
+    # Docker meta 단계 추가
+    - name: Docker meta
+      id: meta
+      uses: docker/metadata-action@v5
+      with:
+        images: |
+          chominchang94/korean-frequi
+        tags: |
+          type=raw,value=latest,enable=${{ github.ref == format('refs/heads/{0}', 'main') }}
+          type=semver,pattern={{version}}
+          type=ref,event=branch
 
     - name: Build and push Docker image
       id: build
@@ -59,7 +71,7 @@ jobs:
         platforms: ${{ matrix.platform }}
         context: .
         file: ./docker/Dockerfile
-        tags: ${{ steps.meta.outputs.tags }}
+        tags: chominchang94/korean-frequi:latest  # 직접 태그 지정
         outputs: type=image,name=chominchang94/korean-frequi,push-by-digest=true,name-canonical=true,push=true
 
     - name: Export digest
