@@ -54,7 +54,7 @@ jobs:
     #   run: pnpm exec playwright test || true  # 실패해도 계속 진행
 
     - name: Archive artifacts
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v5
       with:
         name: freqUI-22
         path: |
